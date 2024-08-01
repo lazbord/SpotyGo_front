@@ -1,8 +1,12 @@
 import * as React from 'react';
-import { StyleSheet, View, Dimensions, Text, Image } from 'react-native'; // Import Text and Image from react-native
+import { StyleSheet, View, Dimensions,TextInput, Text, Image } from 'react-native'; // Import Text and Image from react-native
 import { LinearGradient } from 'expo-linear-gradient';
 
 export default function App() {
+
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -10,11 +14,20 @@ export default function App() {
         style={styles.gradient}
       />
       <View style={styles.roundedRect}>
-        <Image
+        {/* <Image
           style={styles.image}
           source={require('/home/lazare/SpotyGo_front/assets/Spotygo.png')}
-        />
-        <Text style={styles.text}>Ceci est un test</Text>
+        /> */}
+        <Text style={styles.text}>Adresse e-mail ou nom d'utilisateur</Text>
+        <TextInput
+      value={username}
+      onChangeText={text => setUsername(text)}
+    />
+        <Text style={styles.text}>Mot de passe</Text>
+        <TextInput
+      value={password}
+      onChangeText={text => setPassword(text)}
+    />
       </View>
     </View>
   );
@@ -32,8 +45,8 @@ const styles = StyleSheet.create({
     zIndex: -1,
   },
   roundedRect: {
-    width: '75%',
-    height: '80%',
+    width: '37%',
+    height: '90%',
     backgroundColor: '#121212',
     borderRadius: 10,
     justifyContent: 'center',
@@ -43,9 +56,9 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
   },
-  image: {
-    width: '5%', // Adjust the width to make the image smaller (50% of the parent width)
-    aspectRatio: 1, // Maintain aspect ratio (adjust as per your image's aspect ratio)
-    resizeMode: 'contain', // Adjust the resizeMode based on your image aspect ratio requirement
-  },
+  // image: {
+  //   width: '5%', // Adjust the width to make the image smaller (50% of the parent width)
+  //   aspectRatio: 1, // Maintain aspect ratio (adjust as per your image's aspect ratio)
+  //   resizeMode: 'contain', // Adjust the resizeMode based on your image aspect ratio requirement
+  // },
 });
