@@ -33,6 +33,8 @@ export default function App() {
   );
 }
 
+//for git lol
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
