@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, View, Dimensions,TextInput, Text, Image } from 'react-native'; // Import Text and Image from react-native
 import { LinearGradient } from 'expo-linear-gradient';
+import { useFonts, FlowCircular_400Regular } from '@expo-google-fonts/flow-circular';
 
 export default function App() {
 
@@ -22,11 +23,16 @@ export default function App() {
         <TextInput
       value={username}
       onChangeText={text => setUsername(text)}
+      placeholder="Adresse e-mail ou nom d'utilisateur"
+      style={styles.TextInput}
     />
         <Text style={styles.text}>Mot de passe</Text>
         <TextInput
       value={password}
       onChangeText={text => setPassword(text)}
+      placeholder="Mot de passe"
+      style={styles.TextInput}
+      
     />
       </View>
     </View>
@@ -57,7 +63,18 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     fontSize: 18,
+    fontFamily : 'FlowCircular_400Regular',
   },
+  TextInput: {
+    color: 'white',
+    borderColor: 'gray',
+    borderWidth : 1,
+    borderRadius : 5,
+    width : 300,
+    height : 48,
+    padding: 10,
+    fontFamily : 'FlowCircular_400Regular',
+  }
   // image: {
   //   width: '5%', // Adjust the width to make the image smaller (50% of the parent width)
   //   aspectRatio: 1, // Maintain aspect ratio (adjust as per your image's aspect ratio)

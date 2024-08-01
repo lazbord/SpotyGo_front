@@ -9,8 +9,12 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo-google-fonts/flow-circular": "^0.2.3",
+    "@expo-google-fonts/inter": "^0.2.3",
+    "@expo-google-fonts/roboto": "^0.2.3",
     "@expo/metro-runtime": "~3.2.1",
     "expo": "~51.0.20",
+    "expo-font": "~12.0.9",
     "expo-linear-gradient": "~13.0.2",
     "expo-status-bar": "~1.12.1",
     "react": "18.2.0",
