@@ -1,9 +1,13 @@
 import * as React from 'react';
-import { StyleSheet, View, Dimensions,TextInput, Text, Image } from 'react-native'; // Import Text and Image from react-native
+import { StyleSheet, View, Dimensions,TextInput, Text, Image, Pressable, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useFonts, FlowCircular_400Regular } from '@expo-google-fonts/flow-circular';
+import { useFonts, Montserrat_500Medium, Montserrat_600SemiBold } from '@expo-google-fonts/montserrat';
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    Montserrat_500Medium,
+    Montserrat_600SemiBold,
+  });
 
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -19,21 +23,37 @@ export default function App() {
           style={styles.image}
           source={require('/home/lazare/SpotyGo_front/assets/Spotygo.png')}
         /> */}
-        <Text style={styles.text}>Adresse e-mail ou nom d'utilisateur</Text>
-        <TextInput
-      value={username}
-      onChangeText={text => setUsername(text)}
-      placeholder="Adresse e-mail ou nom d'utilisateur"
-      style={styles.TextInput}
-    />
-        <Text style={styles.text}>Mot de passe</Text>
-        <TextInput
-      value={password}
-      onChangeText={text => setPassword(text)}
-      placeholder="Mot de passe"
-      style={styles.TextInput}
-      
-    />
+        
+        <View>
+          <Text>SpotyGO</Text>
+        </View>
+
+        <View>
+
+          <View style={styles.inputs}>
+            <Text style={styles.hint}>Adresse e-mail ou nom d'utilisateur</Text>
+            <TextInput
+          value={username}
+          onChangeText={text => setUsername(text)}
+          placeholder="Adresse e-mail ou nom d'utilisateur"
+          style={styles.TextInput}/>
+          </View>
+
+          <View style={styles.inputs}>
+            <Text style={styles.hint}>Mot de passe</Text>
+            <TextInput
+          value={password}
+          onChangeText={text => setPassword(text)}
+          placeholder="Mot de passe"
+          style={styles.TextInput}/>
+          </View>
+
+          <Pressable style={styles.loggin_btn} onPress={() => Alert.alert("login btn pressed")}>
+            <Text style={styles.loggin_btn_txt}>Se connecter</Text>
+          </Pressable>
+
+        </View>
+
       </View>
     </View>
   );
@@ -60,21 +80,42 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  text: {
+  inputs: {
+    margin: 10,
+  },
+  hint: {
     color: 'white',
-    fontSize: 18,
-    fontFamily : 'FlowCircular_400Regular',
+    fontSize: 13,
+    fontFamily : 'Montserrat_600SemiBold',
+    marginBottom : 10,
   },
   TextInput: {
-    color: 'white',
+    color: 'gray',
     borderColor: 'gray',
     borderWidth : 1,
     borderRadius : 5,
-    width : 300,
+    width : 320,
     height : 48,
-    padding: 10,
-    fontFamily : 'FlowCircular_400Regular',
-  }
+    padding: 15,
+    fontFamily : 'Montserrat_500Medium',
+  },
+  loggin_btn :{
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#1ed760',
+    paddingVertical: 12,
+    paddingHorizontal: 5,
+    borderRadius: 25,
+    margin: 10,
+  },
+  loggin_btn_txt :{
+    fontFamily : 'Montserrat_600SemiBold',
+  },
+  trait :{
+    margin : 50,
+    borderBottomColor: '#2e2e2e',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
   // image: {
   //   width: '5%', // Adjust the width to make the image smaller (50% of the parent width)
   //   aspectRatio: 1, // Maintain aspect ratio (adjust as per your image's aspect ratio)
