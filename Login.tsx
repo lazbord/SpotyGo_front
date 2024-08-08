@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, Dimensions,TextInput, Text, Image, Pressable, Alert } from 'react-native';
+import { StyleSheet, View, Dimensions,TextInput, Text, Image, Pressable, Alert, Linking } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useFonts, Montserrat_500Medium, Montserrat_600SemiBold } from '@expo-google-fonts/montserrat';
 
@@ -12,13 +12,24 @@ export default function Login() {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
 
+   const { width, height } = Dimensions.get('window');
+
+   const isSmallScreen = width < 700;
+
+
   return (
     <View style={styles.container}>
       <LinearGradient
         colors={['transparent', 'rgba(0,0,0,1)']}
         style={styles.gradient}
       />
-      <View style={styles.roundedRect}>
+
+      <View style={[
+        styles.roundedRect,
+        {
+          width: isSmallScreen ? width * 0.9 : 500
+        }
+      ]}>
         
         <View>
           <Image
@@ -50,11 +61,22 @@ export default function Login() {
           style={styles.TextInput}/>
           </View>
 
-          <Pressable style={styles.loggin_btn} onPress={() => Alert.alert("login btn pressed")}>
-            <Text style={styles.loggin_btn_txt}>Se connecter</Text>
+          <Pressable
+          onPress={() => Alert.alert("login btn pressed")}
+          style={({ hovered }) => [
+            styles.loggin_btn,
+            hovered && { transform: [{ scale: 1.05 }] },
+          ]}
+          >
+          <Text style={styles.loggin_btn_txt}>Se connecter</Text>
           </Pressable>
 
         </View>
+
+        <Text style={styles.help}
+          onPress={() => Linking.openURL('http://google.fr')}>
+          Besoin d'aide ?
+        </Text>
 
       </View>
     </View>
@@ -73,8 +95,8 @@ const styles = StyleSheet.create({
     zIndex: -1,
   },
   roundedRect: {
-    width: '37%',
-    height: '90%',
+    width: 500,
+    height: 700,
     backgroundColor: '#121212',
     borderRadius: 10,
     justifyContent: 'center',
@@ -111,19 +133,23 @@ const styles = StyleSheet.create({
   loggin_btn_txt :{
     fontFamily : 'Montserrat_600SemiBold',
   },
-  trait :{
-    margin : 50,
-    borderBottomColor: '#2e2e2e',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-  },
   title :{
     color: 'white',
     fontSize: 30,
     fontFamily : 'Montserrat_600SemiBold',
+    marginBottom: 25,
   },
   image: {
-    width: 50,
-    height: 50,
+    width: 75,
+    height: 75,
+    marginBottom: 10,
     resizeMode: 'contain',
   },
+  help: {
+    color : 'white',
+    textDecorationLine: 'underline',
+    fontSize: 12,
+    fontFamily : 'Montserrat_500Medium',
+    marginTop: 50,
+  }
 });
