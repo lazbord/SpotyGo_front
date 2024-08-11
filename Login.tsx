@@ -3,6 +3,7 @@ import { StyleSheet, View, Dimensions,TextInput, Text, Image, Pressable, Alert, 
 import { LinearGradient } from 'expo-linear-gradient';
 import { useFonts, Montserrat_500Medium, Montserrat_600SemiBold } from '@expo-google-fonts/montserrat';
 
+
 export default function Login() {
   const [fontsLoaded] = useFonts({
     Montserrat_500Medium,
@@ -12,9 +13,24 @@ export default function Login() {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
 
-   const { width, height } = Dimensions.get('window');
+  const { width, height } = Dimensions.get('window');
 
-   const isSmallScreen = width < 700;
+  const isSmallScreen = width < 700;
+
+  const LoginRequest = () => {
+    fetch('http://localhost:8080/login', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: username,
+        password: password
+      }),
+    });
+  }
+
 
 
   return (
@@ -62,7 +78,7 @@ export default function Login() {
           </View>
 
           <Pressable
-          onPress={() => Alert.alert("login btn pressed")}
+          onPress={LoginRequest}
           style={({ hovered }) => [
             styles.loggin_btn,
             hovered && { transform: [{ scale: 1.05 }] },
