@@ -18,7 +18,7 @@ export default function Login() {
   const isSmallScreen = width < 700;
 
   const LoginRequest = () => {
-    fetch('http://localhost:8080/login', {
+    fetch('http://localhost:5000/login', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -28,7 +28,15 @@ export default function Login() {
         email: username,
         password: password
       }),
-    });
+    })
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+    })
+    .then(data => {
+      console.log("User ID:", data.userid)
+    })
   }
 
 
@@ -70,7 +78,8 @@ export default function Login() {
 
           <View style={styles.inputs}>
             <Text style={styles.hint}>Mot de passe</Text>
-            <TextInput
+            <TextInput 
+          secureTextEntry={true}
           value={password}
           onChangeText={text => setPassword(text)}
           placeholder="Mot de passe"

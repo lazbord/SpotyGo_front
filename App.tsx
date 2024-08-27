@@ -1,13 +1,19 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
+import Login from './Login';
 
 export default function App() {
   return (
     <View style={styles.background}>
-      <View style={styles.main}>
+      <View style={styles.header}></View>
+      
+      <View style={styles.container}>
+        <View style={styles.left}></View>
+        <View style={styles.center}></View>
+        <View style={styles.right}></View>
       </View>
-      <View style={styles.footer}>
-      </View>
+
+      <View style={styles.footer}></View>
     </View>
   );
 }
@@ -15,26 +21,39 @@ export default function App() {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
     backgroundColor: 'black',
   },
-  main: {
+  header: {
+    height: 70,
+    width: '100%',
+    backgroundColor: 'green',
+  },
+  container: {
     flex: 1,
-    top: 10,
-    width: '55%',
-    height: 'auto',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'white',
+    flexDirection: 'row',
+    width: '100%',
+  },
+  left: {
+    flex: 1,
+    backgroundColor: '#121212',
+    margin: 5,
     borderRadius: 10,
-    marginBottom: 10, // This margin will now be respected
+  },
+  center: {
+    width: '55%',
+    backgroundColor: '#121212',
+    margin: 5,
+    borderRadius: 10,
+  },
+  right: {
+    flex: 1,
+    backgroundColor: '#121212',
+    margin: 5,
+    borderRadius: 10,
   },
   footer: {
-    width: '100%',
     height: 90,
-    alignItems: 'center',
-    justifyContent: 'center',
+    width: '100%',
     backgroundColor: 'green',
   },
 });
