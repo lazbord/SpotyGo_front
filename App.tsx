@@ -1,15 +1,27 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import Login from './Login';
+import { LinearGradient } from 'expo-linear-gradient';
+import Header from './components/header';
 
 export default function App() {
   return (
     <View style={styles.background}>
-      <View style={styles.header}></View>
+      <View style={styles.header}>
+        <Header />
+      </View>
       
       <View style={styles.container}>
         <View style={styles.left}></View>
-        <View style={styles.center}></View>
+
+        <View style={styles.center}>
+          <LinearGradient
+            colors={['#126930', '#0a3b1b', '#072b14', '#121212']}
+            locations={[0, 0.2,0.3,0.55, 1]}
+            style={styles.centerGradient}
+          >
+          </LinearGradient>
+        </View>
+
         <View style={styles.right}></View>
       </View>
 
@@ -24,9 +36,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
   },
   header: {
-    height: 70,
+    height: 65,
     width: '100%',
-    backgroundColor: 'green',
   },
   container: {
     flex: 1,
@@ -36,24 +47,27 @@ const styles = StyleSheet.create({
   left: {
     flex: 1,
     backgroundColor: '#121212',
-    margin: 5,
+    marginLeft: 12,
     borderRadius: 10,
   },
   center: {
-    width: '55%',
-    backgroundColor: '#121212',
-    margin: 5,
+    width: '70%',
+    marginLeft: 10,
+    marginRight: 10,
     borderRadius: 10,
+    overflow: 'hidden',
+  },
+  centerGradient: {
+    flex: 1,
   },
   right: {
     flex: 1,
     backgroundColor: '#121212',
-    margin: 5,
+    marginRight: 12,
     borderRadius: 10,
   },
   footer: {
     height: 90,
     width: '100%',
-    backgroundColor: 'green',
   },
 });
