@@ -1,14 +1,53 @@
 import * as React from 'react';
-import { StyleSheet, View, Image, TextInput, Text, Pressable, Linking} from 'react-native';
+import { StyleSheet, View, Image, TextInput, Text, Pressable, Linking } from 'react-native';
 import { useFonts, Montserrat_500Medium, Montserrat_600SemiBold } from '@expo-google-fonts/montserrat';
-
+import { YOUTUBE_API_KEY } from '@env';
+import axios from 'axios';
 
 export default function Header() {
-
   const [fontsLoaded] = useFonts({
     Montserrat_500Medium,
     Montserrat_600SemiBold,
   });
+
+  const [searchQuery, setSearchQuery] = React.useState('');
+
+  const HandleOnKeyPress = (event) => {
+    const key = event.nativeEvent.key;
+    if (key === "Enter") {
+      SearchMusic(searchQuery);
+    }
+  };
+
+  const SearchMusic = async (query) => {
+    if (!query) return;
+
+    try {
+      const response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
+        params: {
+          key: YOUTUBE_API_KEY,
+          part: 'snippet',
+          q: query,
+          type: 'video',
+          maxResults: 10
+        },
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+
+      console.log(response.data);
+    } catch (error) {
+      if (error.response) {
+        console.error('Error response:', error.response.data);
+        console.error('Error status:', error.response.status);
+      } else if (error.request) {
+        console.error('Error request:', error.request);
+      } else {
+        console.error('Error message:', error.message);
+      }
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -40,6 +79,9 @@ export default function Header() {
             style={styles.searchBar}
             placeholder="Que souhaitez-vous écouter ?"
             placeholderTextColor="#888"
+            value={searchQuery}
+            onChangeText={text => setSearchQuery(text)}
+            onKeyPress={HandleOnKeyPress}
           />
         </View>
 
